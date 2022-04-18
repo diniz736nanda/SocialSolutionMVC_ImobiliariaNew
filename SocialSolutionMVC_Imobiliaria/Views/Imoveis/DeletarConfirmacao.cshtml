@@ -1,0 +1,12 @@
+﻿@model ImovelModel
+@{
+    ViewData["Title"] = "Deletar Imoveis";
+}
+
+<div class="text-center">
+    <h3 class="display-4">Deseja realmente deletar este imóvel (@Model.Id) ? </h3>
+</div>
+
+<a class="btn btn-primary btn-block" role="button" asp-controller="Imoveis" asp-action="Index">Cancelar exclusão</a>
+<a class="btn btn-danger btn-block" role="button" asp-controller="Imoveis" asp-action="Apagar" asp-route-id="@Model.Id">Confirmar exclusão</a>
+

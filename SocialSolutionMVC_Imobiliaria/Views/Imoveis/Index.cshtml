@@ -1,0 +1,69 @@
+﻿@model List<ImovelModel>
+@{
+    ViewData["Title"] = "Listagem de Imóveis";
+}
+
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-success" role="button" asp-controller="Imoveis" asp-action="Criar">Adicionar</a>
+    </div>
+    <br />
+    @if (TempData["MenssagemSucesso"] != null)
+    {
+
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert"> X</button>
+            This is a success alert—check it out!
+        </div>
+    }
+    @if (TempData["MenssagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert"> X</button>
+
+            This is a danger alert—check it out!
+        </div>
+    }
+    <h1 class="display-4">Listagem de Imóveis</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Tipo Negocio</th>
+                <th scope="col">Valor Imóvel</th>
+                <th scope="col">Desc</th>
+                <th scope="col">Status</th>
+                <th scope="col">Cliente</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (ImovelModel imovel in Model)
+                {
+                    <tr>
+                        <th scope="row">@imovel.Id</th>
+                        <td>@imovel.TipoNegocio</td>
+                        <td>@imovel.VlrImovel</td>
+                        <td>@imovel.Desc</td>
+                        <td>@imovel.StatusImovel</td>
+                        <td>@imovel.Cliente</td>
+
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary" asp-controller="Imoveis" asp-action="Editar" asp-route-id="@imovel.Id">Editar</a> |
+                                <a role="button" class="btn btn-danger" asp-controller="Imoveis" asp-action="DeletarConfirmacao" asp-route-id="@imovel.Id">Apagar</a>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+</div>
